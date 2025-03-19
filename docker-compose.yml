@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  userconnectionservice:
+    image: ${DOCKER_REGISTRY-}userconnectionservice
+    build:
+      context: .
+      dockerfile: UserConnectionService/Dockerfile
+    environment:
+      - DB_CONNECTION=Host=db;Database=UserServiceDb;Username=postgres;Password=example
+    ports:
+      - "5000:80"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_PASSWORD=example
+      - POSTGRES_DB=UserServiceDb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:

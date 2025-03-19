@@ -1,0 +1,17 @@
+@UserConnectionService_HostAddress = http://localhost:5069
+
+### 1. Добавить событие подключения
+POST {{UserConnectionService_HostAddress}}/api/connection?userId=100001&ipAddress=127.0.0.1
+Accept: application/json
+
+### 2. Найти пользователей по частичному IP (например, "31.214")
+GET {{UserConnectionService_HostAddress}}/api/users/by-ip/31.214
+Accept: application/json
+
+### 3. Получить все IP-адреса пользователя (userId=100001)
+GET {{UserConnectionService_HostAddress}}/api/users/100001/ips
+Accept: application/json
+
+### 4. Получить последнее подключение пользователя (userId=100001)
+GET {{UserConnectionService_HostAddress}}/api/users/100001/last-connection
+Accept: application/json
